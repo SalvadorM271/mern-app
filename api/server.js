@@ -5,9 +5,9 @@ const bodyParser = require('body-parser');
 console.log('environment    ', process.env.ENVIRONMENT)
 console.log('PORT    ', process.env.PORT)
 console.log('MONGO_CONNECTION_STRING    ', process.env.MONGO_CONNECTION_STRING)
-if(process.env.ENVIRONMENT !== 'production') {
+/*if(process.env.ENVIRONMENT !== 'production') {
     require('dotenv').config()
-}
+}*/
 
 
 const taskController = require('./controller/task.controller')
