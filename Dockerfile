@@ -8,8 +8,7 @@ RUN cd ui && npm install && npm run build
 FROM node:14-slim AS api-build
 WORKDIR /usr/src
 COPY api/ ./api/
-# pass a diferent value to ENVIRONMENT and another app will be created base on webpack.config.js
-RUN cd api && npm install && ENVIRONMENT=production npm run build
+RUN cd api && npm install && npm run build
 RUN ls
 
 # Stage3: Packagign the app
