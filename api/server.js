@@ -15,7 +15,7 @@ const taskController = require('./controller/task.controller')
 
 
 const app = express();
-const port = process.env.PORT || 3080;
+const port = process.env.PORT || 80;
 
 app.use(express.static(path.join(__dirname, "./ui/build")));
 app.use(bodyParser.json());

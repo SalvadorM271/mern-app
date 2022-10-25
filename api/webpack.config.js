@@ -7,15 +7,15 @@ console.log('environment:::::', environment);
 
 let ENVIRONMENT_VARIABLES = {
   'process.env.ENVIRONMENT': JSON.stringify('development'),
-  'process.env.PORT': JSON.stringify('3080'),
-  'process.env.MONGO_CONNECTION_STRING': JSON.stringify('mongodb://mongo-db:27017')
+  'process.env.PORT': JSON.stringify('80'),
+  'process.env.MONGO_CONNECTION_STRING': JSON.stringify('mongodb+srv://admin:admin@cluster0.y7foy9t.mongodb.net/?retryWrites=true&w=majority')
 };
 
-if (environment === 'test') {
+if (environment === 'staging') {
   ENVIRONMENT_VARIABLES = {
-    'process.env.ENVIRONMENT': JSON.stringify('test'),
-    'process.env.PORT': JSON.stringify('3080'),
-    'process.env.MONGO_CONNECTION_STRING': JSON.stringify('mongodb://mongo-db:27017')
+    'process.env.ENVIRONMENT': JSON.stringify('staging'),
+    'process.env.PORT': JSON.stringify('80'),
+    'process.env.MONGO_CONNECTION_STRING': JSON.stringify('mongodb+srv://admin:admin@cluster0.y7foy9t.mongodb.net/?retryWrites=true&w=majority')
   };
 } else if (environment === 'production') {
   ENVIRONMENT_VARIABLES = {
