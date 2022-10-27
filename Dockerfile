@@ -8,7 +8,7 @@ RUN cd ui && npm install && npm run build
 FROM node:14-slim AS api-build
 WORKDIR /usr/src
 COPY api/ ./api/
-RUN cd api && npm install && npm run build
+RUN cd api && npm install && ENVIRONMENT=production npm run build
 RUN ls
 
 # Stage3: Packagign the app
