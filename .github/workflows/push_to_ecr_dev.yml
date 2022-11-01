@@ -1,0 +1,55 @@
+name: "create a pull request from feature to staging"
+
+on:
+  push:
+    branches:
+      - "feature/*"
+
+#this action creates a pull request from the feature branch to the staging branch
+#but before that runs tests to check if there are no conflicts in the push files
+
+jobs:
+  #pushes code to the nex branch using a pull request
+  stagingPromotion:
+    name: create pull req
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: staging
+      - name: Reset promotion branch
+        run: |
+          git fetch origin feature/development:feature/development
+          git reset --hard feature/development
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: staging-promotion #creates a temporary branch for the pull request
+  #creates and pushes image to an ecr repo
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v2
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: mernapp-dev
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg enviroment=development .  
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
