@@ -49,7 +49,19 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: mernapp-dev
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest  #${{ github.sha }}
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg enviroment=development .  
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  deploy:
+    name: reset service
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-2
+        AWS_DEFAULT_OUTPUT: json
+      run: sudo aws ecs update-service --cluster esc-app-cluster-development --service esc-app-service-development --force-new-deployment --region us-east-2
