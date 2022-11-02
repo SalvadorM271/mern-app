@@ -11,7 +11,7 @@ FROM node:14-slim AS api-build
 WORKDIR /usr/src
 COPY api/ ./api/
 # docker build -t mern-app --build-arg enviroment=production .
-RUN cd api && npm install && ENVIRONMENT=$enviroment npm run build
+RUN cd api && npm install && -e ENVIRONMENT=$enviroment -e URI="qntsjuk" npm run build
 RUN ls
 
 # Stage3: Packagign the app
