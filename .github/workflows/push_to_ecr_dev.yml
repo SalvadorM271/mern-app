@@ -53,4 +53,4 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg enviroment=development .  
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      run: sudo aws ecs update-service --cluster esc-app-cluster-development --service esc-app-service-development --force-new-deployment --region us-east-2
+        sudo aws ecs update-service --cluster esc-app-cluster-development --service esc-app-service-development --force-new-deployment --region us-east-2
