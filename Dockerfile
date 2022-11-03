@@ -1,5 +1,3 @@
-#ARG enviroment
-
 # Stage1: UI Build
 FROM node:14-slim AS ui-build
 WORKDIR /usr/src
@@ -10,6 +8,8 @@ RUN cd ui && npm install && npm run build
 FROM node:14-slim AS api-build
 WORKDIR /usr/src
 COPY api/ ./api/
+ARG enviroment
+ENV ENVIRONMENT $enviroment
 #ENV ENVIRONMENT test
 #ENV URI test
 # docker build -t mern-app --build-arg enviroment=development .
