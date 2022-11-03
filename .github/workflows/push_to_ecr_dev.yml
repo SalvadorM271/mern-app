@@ -28,6 +28,7 @@ jobs:
   #creates and pushes image to an ecr repo
   build:
     name: Build Image
+    needs: stagingPromotion
     runs-on: ubuntu-latest
     steps:
 
@@ -53,3 +54,15 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg enviroment=development .   
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  # resets service
+  reset:
+    name: reset
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: reset service
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: 
+        aws ecs update-service --cluster esc-app-cluster-development --service esc-app-service-development --force-new-deployment --region us-east-2
