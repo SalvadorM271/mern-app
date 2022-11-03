@@ -52,7 +52,7 @@ jobs:
         ECR_REPOSITORY: mernapp-dev
         IMAGE_TAG: latest  #${{ github.sha }} #docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg enviroment=development .
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg enviroment=development .   
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -e ENVIRONMENT=development .   
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
   # resets service
   reset:
