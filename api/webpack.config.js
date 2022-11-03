@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const environment = process.env.ENVIRONMENT;
-const uri = process.env.URI;
+const uri = process.env.URI || "s9mxdyu";
 const uridb = `mongodb+srv://admin:admin@development-db.${uri}.mongodb.net/development?retryWrites=true&w=majority` // working format 
 //dburi = "mongodb+srv://esc-app-dbcluster-devel.b59mwv7.mongodb.net" --- format from terraform
 //"mongodb+srv://admin:admin@development-db.  qntsjuk  .mongodb.net/development?retryWrites=true&w=majority"
