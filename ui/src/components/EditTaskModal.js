@@ -20,7 +20,7 @@ export default function EditTaskModal({task, taskEdited}) {
   
     return (
       <>
-        <Button variant="warning" onClick={handleShow}>
+        <Button className='btn btn-danger' onClick={handleShow}>
           Edit
         </Button>
   
