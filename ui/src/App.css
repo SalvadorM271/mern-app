@@ -1,22 +1,8 @@
-body{
-  background-color: #3B3B3B;
-  height: 100vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  color: white;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
 .header {
   width: 100%;
   padding: 2%;
-  background-color: transparent;
-  color: white;
-  margin-top: 5vh;
-  margin-bottom: -10vh;
+  background-color: rgb(45, 204, 53);
+  color: black;
   text-align: center;
 }
 
@@ -31,70 +17,3 @@ body{
 .mrgnttm10 {
   margin-bottom: 10px;
 }
-
-.button {
-  appearance: none;
-  background-color: transparent;
-  border: 2px solid white;
-  color: white !important;
-  border-radius: 0px;
-  box-sizing: border-box;
-  color: #3B3B3B;
-  cursor: pointer;
-  display: inline-block;
-  width: 100%;
-  font-size: 1.1em;
-  margin: 3vh auto;
-}
-
-.sp{
-  margin-top: 3vh;
-  margin-bottom: 3vh;
-}
-
-.square{
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 0;
-  color: white !important;
-}
-
-.square:focus{
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 0;
-  color: white !important;
-}
-
-.square:disabled{
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 0;
-  color: white !important;
-}
-
-option{
-  background-color: #3B3B3B;
-}
-
-.table-bordered{
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 0;
-  color: white !important;
-}
-
-.btn{
-  appearance: none;
-  background-color: transparent;
-  border: 2px solid white;
-  color: white !important;
-  border-radius: 0px;
-  box-sizing: border-box;
-  color: #3B3B3B;
-  cursor: pointer;
-}
-
-
-
-
