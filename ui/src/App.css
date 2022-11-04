@@ -86,7 +86,7 @@ option{
 
 .btn{
   appearance: none;
-  background-color: transparent;
+  background-color: #df4759;
   border: 2px solid white;
   color: white !important;
   border-radius: 0px;
