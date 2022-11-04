@@ -27,6 +27,7 @@ jobs:
   #creates and pushes image to an ecr repo
   build:
     name: Build Image
+    needs: mainPromotion
     runs-on: ubuntu-latest
     steps:
 
@@ -49,6 +50,21 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: mernapp-stag
         IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG_L: latest  #${{ github.sha }} #docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_L --build-arg enviroment=development .
       run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_L --build-arg enviroment=staging .  
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_L
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg enviroment=staging .  
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  # resets service
+  reset:
+    name: reset
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: reset service
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: 
+        aws ecs update-service --cluster esc-app-cluster-staging --service esc-app-service-staging --force-new-deployment --region us-east-2
