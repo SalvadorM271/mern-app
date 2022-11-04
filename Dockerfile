@@ -1,10 +1,10 @@
-# Stage1: UI Build
+# building the frontend
 FROM node:14-slim AS ui-build
 WORKDIR /usr/src
 COPY ui/ ./ui/
 RUN cd ui && npm install && npm run build
     
-# Stage2: API Build
+# building the backend
 FROM node:14-slim AS api-build
 WORKDIR /usr/src
 COPY api/ ./api/
@@ -13,7 +13,7 @@ ENV ENVIRONMENT=${enviroment}
 RUN cd api && npm install && npm run build
 RUN ls
     
-# Stage3: Packagign the app
+# finishing the whole package
 FROM node:14-slim
 WORKDIR /root/
 COPY --from=ui-build /usr/src/ui/build ./ui/build

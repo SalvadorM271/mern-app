@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <div className="header">
             <h1>
-                MERN Stack Example v6
+                TODO list v8
             </h1>
         </div>
     )
