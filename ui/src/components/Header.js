@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <div className="header">
             <h1>
-                TODO list v6
+                TODO list v7
             </h1>
         </div>
     )
