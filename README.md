@@ -35,3 +35,7 @@ after that we need to commit our changes
 and finally
 
 `git push`
+
+## App
+
+<img src="./images/app.png" width="850"/>
